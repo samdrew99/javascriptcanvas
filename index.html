@@ -1,0 +1,133 @@
+<!-- Worked with Flan O'Donnel, Dominique Rottman, Anna Groffsky, Kristen Picard, Nell S., Michael Barsky -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+</body>
+<script>
+
+	function resizeCanvas(){
+    var canvas = document.getElementById("myCanvas");
+    canvas.width = window.innerWidth * 0.80;
+    canvas.height = window.innerHeight * 0.80;
+	}
+	resizeCanvas();
+
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+	var color = "black";
+	var keycolor = "black";
+  ctx.fillStyle = color;
+	ctx.strokeStyle = color;
+
+	function draw(posX, posY){
+    ctx.beginPath();
+    ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+  }
+	color_picker = document.getElementById("picker");
+		window.addEventListener("change", function (e){
+			color = color_picker.value;
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+
+	})
+
+	myCanvas.addEventListener(
+  'mousemove', function (e){
+    console.log(e.x);
+    console.log(e.y);
+    draw(e.x, e.y);
+  })
+
+  window.addEventListener(
+    'keydown', function (e){
+    	console.log(e);
+		var x = e.keyCode;
+		if (x == 32) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+		}
+
+		if (x == 71) {
+			color = 'green';
+			keycolor = "green";
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 82) {
+			color = 'red';
+			keycolor = "red";
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 66) {
+			color = 'blue';
+			keycolor = "blue";
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (e.keyCode == 89) {
+			color = 'yellow';
+			keycolor = "yellow";
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (e.keyCode ==38){
+		color = "#00000000"
+		ctx.fillStyle = color;
+		ctx.strokeStyle = color;
+	}
+	if (e.keyCode == 40){
+		color = keycolor
+		ctx.fillStyle = color;
+		ctx.strokeStyle = color;
+
+	}
+
+
+	})
+
+</script>
+</html>
+<!-- b = 66 -->
+
+
+<!-- The first objective of this assignment is to demonstrate that you can use Listeners to update the Canvas element.  You should use listeners, not events within the elements as we did in the earlier JS homework.
+
+The second objective of this assignment is to demonstrate the ability to debug and problem solve.  Therefore, the GSIs and myself will be providing less support in the theoretical aspects of the assignment past drawing and changing colors.  We are happy to help with syntactic questions.
+
+Every student will demo their project during discussion in a question/answer format.  If you have code you don't understand you will not receive credit on the assignment.
+
+Steps:
+
+The canvas element should have a width of 80% of the screen width and a height of 80% of the screen height. The element does NOT need to react if I resize the screen, but it should react if I resize the screen and hit reload.
+
+The program should react to the mouse moving within the canvas area and draw a circle of radius 10. The center of the circle should be exactly where the mouse cursor is located.
+
+NOTE: React to the mouse moving - don’t make me do a drag.
+NOTE: If you move the mouse too quickly the line will be choppy - that is okay.
+
+The program should react to the b, r, g, and y keys - it should change the “pen” color to blue, red, green, or yellow respectively.
+
+The program should react to the space key - it should clear the canvas of any drawing.
+
+The program should react to the up and down arrows If I press the up arrow the pen is “lifted” from the canvas and I can move it without any drawing. If I press the down arrow the pen is placed back “on” the canvas and drawing resumes.
+
+The program should react to a change in value in the color picker and use whatever color is chosen as the new color.
+
+NOTE: After using the color picker I will always click somewhere on the page to take focus off the color picker. Otherwise the space key tends to activate it again. -->
